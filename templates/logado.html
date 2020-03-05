@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Jinja2 Exemplo!</title>
+  </head>
+  <body>
+    <table>
+        {% for user in users %}
+        <tr>
+            <td width="50px">{{ user[0] }}</td>
+            <td width="100px">{{ user[1] }}</td>
+            <td width="100px">{{ user[2] }}</td>
+            <td width="100px">
+                <a href="/excluir?id={{ user[0] }}">EXCLUIR</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+  </body>
+</html>
