@@ -1,1 +1,19 @@
-.
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Alterar</title>
+  </head>
+  <body>
+    <p>{{ mensagem }}</p>
+    <br>
+    <h2>Alterando o usuário {{ name }}</h2>
+    <form action="/alterar-save" method="POST">
+        <input type="hidden" name="id" id="id" value="{{ id }}">
+      <input type="text" id="name" name="name" placeholder="Nome" autocomplete="off" value="{{ name }}" /><br><br>
+      <input type="text" id="login" name="login" placeholder="Login" autocomplete="off" value="{{ login }}" /><br><br>
+      <input type="password" id="pwd" name="password" placeholder="Senha" autocomplete="off" value="{{ password }}" /><br><br>
+      <button type="submit">Salvar</button><br><br>
+      <a href="/logado">< Voltar</a></Voltar>
+    </form>
+  </body>
+</html>

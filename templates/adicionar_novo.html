@@ -1,1 +1,18 @@
-.
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Alterar</title>
+  </head>
+  <body>
+    <p>{{ mensagem }}</p>
+    <br>
+    <h2>Adicionar novo usuário</h2>
+    <form action="/adicionar-novo-save" method="POST">
+      <input type="text" id="name" name="name" placeholder="Nome" autocomplete="off" /><br><br>
+      <input type="text" id="login" name="login" placeholder="Login" autocomplete="off" /><br><br>
+      <input type="password" id="pwd" name="password" placeholder="Senha" autocomplete="off" /><br><br>
+      <button type="submit">Adicionar</button><br><br>
+      <a href="/logado">< Voltar</a></Voltar>
+    </form>
+  </body>
+</html>

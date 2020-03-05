@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Jinja2 Exemplo!</title>
+    <title>Logado no sistema</title>
   </head>
   <body>
+    <div>
+      <a href="/adicionar-novo">ADICIONAR NOVO!</a><br><br>
+    </div>
     <table>
         {% for user in users %}
         <tr>
             <td width="50px">{{ user[0] }}</td>
             <td width="100px">{{ user[1] }}</td>
             <td width="100px">{{ user[2] }}</td>
-            <td width="100px">
-                <a href="/excluir?id={{ user[0] }}">EXCLUIR</a>
+            <td width="200px">
+                <a href="/excluir?id={{ user[0] }}">EXCLUIR</a> - <a href="/alterar?id={{ user[0] }}">ALTERAR</a>
             </td>
         </tr>
         {% endfor %}
