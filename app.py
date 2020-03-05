@@ -1,6 +1,4 @@
 from flask import Flask, jsonify, request, render_template
-from alunos_api import alunos_app, alunos_db
-from professores_api import professores_app, professores_db
 import sqlite3
 
 connection = sqlite3.connect("serralheria_banco.db")
@@ -9,19 +7,6 @@ cur.execute('CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, name TEXT
 cur.close()
 
 app = Flask(__name__)
-app.register_blueprint(alunos_app)
-app.register_blueprint(professores_app)
-
-def inserir_usuario(name, login, password):
-    connection = sqlite3.connect('serralheria_banco.db')
-    cursor = connection.cursor()
-    sql = "INSERT INTO users (name, login, password) VALUES (?, ?, ?)"
-    cursor.execute(sql, (name, login, password))
-    id_cliente = cursor.lastrowid
-    connection.commit()
-    cursor.close()
-    connection.close()
-    return id_cliente
 
 @app.route("/login", methods=["GET"])
 def login():
@@ -70,13 +55,51 @@ def excluir():
 @app.route("/alterar", methods=["GET"])
 def alterar():
     id = request.args.get('id')
-    save = request.args.get('save')
 
-    if save == "sim":
-        
-        return render_template('alterar.html', mensagem="Alterado com sucesso!", id=id)
-    else:
-        return render_template('alterar.html', id=id)
+    connection = sqlite3.connect("serralheria_banco.db")
+    c = connection.cursor()
+    c.execute('SELECT * FROM users WHERE id=?', (id))
+    row = c.fetchone()
+
+    return render_template('alterar.html', name=row[1], login=row[2], password=row[3], id=id)
+
+@app.route("/alterar-save", methods=["POST"])
+def alterarSave():
+    id = request.form["id"]
+    name = request.form["name"]
+    login = request.form["login"]
+    password = request.form["password"]
+
+    connection = sqlite3.connect("serralheria_banco.db")
+    c = connection.cursor()
+
+    res = c.execute("UPDATE users SET name=?, login=?, password=? WHERE id=?", (name, login, password, id))
+    connection.commit()
+
+    c.execute('SELECT * FROM users WHERE id=?', (id))
+    row = c.fetchone()
+
+    return render_template('alterar.html', mensagem="Alterado com sucesso!", name=row[1], login=row[2], password=row[3], id=id)
+
+
+@app.route("/adicionar-novo", methods=["GET"])
+def adicionarNovo():
+    return render_template('adicionar_novo.html')
+
+@app.route("/adicionar-novo-save", methods=["POST"])
+def adicionarNovoSave():
+    name = request.form["name"]
+    login = request.form["login"]
+    password = request.form["password"]
+
+    connection = sqlite3.connect('serralheria_banco.db')
+    cursor = connection.cursor()
+    cursor.execute("INSERT INTO users (name, login, password) VALUES (?, ?, ?)", (name, login, password))
+    connection.commit()
+    cursor.close()
+    connection.close()
+
+    return render_template('adicionar_novo.html', mensagem="Adicionado com sucesso!!")
 
 if __name__ == '__main__':
     app.run(debug=True)
