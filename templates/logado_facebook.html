@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Sistema de gerenciar usuários</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='sgu.css')}}">
+    <style>
+        body 
+        {
+            background-image: none;
+            background-color: #fff;
+        }
+        .logado-com-facebook 
+        {
+            margin: 0px;
+            max-width: 400px;
+            display: block;
+        }
+    </style>
+  </head>
+  <body>
+    <div>
+        <div align="right"> [ <a href="/login"> SAIR! </a> ]</div> 
+      <div class="logado-com-facebook">
+        <div class="foto-facebook">
+          <img src="http://graph.facebook.com/{{ uid }}/picture?type=large" alt="Foto do facebook">
+        </div>
+        <div class="informacoes-facebook">
+          <div class="uid-facebook">UID: {{ uid }}</div>
+          <div class="nome-facebook">Nome: {{ name }}</div>
+          <div class="email-facebook">E-mail: {{ email }}</div>
+        </div>
+      </div>
+      <br>
+      <br>
+      <a href="/adicionar-novo">ADICIONAR NOVO!</a><br><br>
+    </div>
+    <table>
+        {% for user in users %}
+        <tr>
+            <td width="90px"><b>[ {{ user[6] }} ]</b></td>
+            <td width="50px">{{ user[0] }}</td>
+            <td width="200px">{{ user[3] }}</td>
+            <td width="100px">{{ user[2] }}</td>
+            <td width="200px">
+                <a href="/excluir?id={{ user[0] }}">EXCLUIR</a> - <a href="/alterar?id={{ user[0] }}">ALTERAR</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+  </body>
+</html>

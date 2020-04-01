@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Alterar</title>
+    <title>Sistema de gerenciar usuários - Alterar</title>
   </head>
   <body>
     <p>{{ mensagem }}</p>
@@ -10,6 +10,7 @@
     <form action="/alterar-save" method="POST">
         <input type="hidden" name="id" id="id" value="{{ id }}">
       <input type="text" id="name" name="name" placeholder="Nome" autocomplete="off" value="{{ name }}" /><br><br>
+      <input type="text" id="email" name="email" placeholder="E-mail" autocomplete="off" value="{{ email }}" /><br><br>
       <input type="text" id="login" name="login" placeholder="Login" autocomplete="off" value="{{ login }}" /><br><br>
       <input type="password" id="pwd" name="password" placeholder="Senha" autocomplete="off" value="{{ password }}" /><br><br>
       <button type="submit">Salvar</button><br><br>

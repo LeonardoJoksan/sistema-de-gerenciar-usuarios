@@ -1,14 +1,39 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Jinja2 Exemplo!</title>
+    <title>Sistema de gerenciar usuários - Login</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='sgu.css')}}">
+
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v6.0&appId=205811940706259&autoLogAppEvents=1"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script src="{{url_for('static', filename='sgu-login-facebook.js')}}"></script>
   </head>
   <body>
-    <p>{{ mensagem }}</p>
-    <form action="/form_teste" method="POST">
-      <input type="text" id="login" name="login" autocomplete="off" />
-      <input type="password" id="pwd" name="password" autocomplete="off" />
-      <button type="submit">Logar</button>
-    </form>
+    <div class="box-login">
+      <h1>Gerenciar Usuários</h1>
+      <p>{{ mensagem }}</p>
+        <form action="/entrar" method="POST">
+          <input type="text" id="login" name="login" autocomplete="off" placeholder="Digite o Login" /> <br>
+          <input type="password" id="pwd" name="password" autocomplete="off" placeholder="Digite a Senha" /> <br>
+          <button type="submit">Logar</button>
+        </form>
+          <br>
+          <br>
+          <span>-----------OU-----------</span>
+          <br><br>
+        <div class="logado-com-facebook">
+          <div class="foto-facebook">
+            <img src="" alt="">
+          </div>
+          <div class="informacoes-facebook">
+            <div class="uid-facebook"></div>
+            <div class="nome-facebook"></div>
+            <div class="email-facebook"></div>
+          </div>
+        </div>
+
+        <div onclick="return loginfb();" class="login-facebook">Login com Facebook</div>
+    </div>
   </body>
 </html>

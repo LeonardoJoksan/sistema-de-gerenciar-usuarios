@@ -1,10 +1,21 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Logado no sistema</title>
+    <title>Sistema de gerenciar usuários</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='sgu.css')}}">
+    <style>
+      body 
+      {
+          background-image: none;
+          background-color: #fff;
+      }
+  </style>
   </head>
   <body>
     <div>
+      <div align="right"> [ <a href="/login"> SAIR! </a> ]</div> 
+      Bem vindo {{ login }} !
+      <br>
       <a href="/adicionar-novo">ADICIONAR NOVO!</a><br><br>
     </div>
     <table>
